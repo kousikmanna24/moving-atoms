@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moving Atoms — Marketing Without The Headaches</title>
+<meta name="description" content="Moving Atoms creates human-centered marketing solutions across brand design, web development, SEO, and paid advertising.">
+<style>
+:root{
+  --bg:#080808;--surface:#111;--surface2:#171717;--text:#f5f5f2;--muted:#aaa;
+  --accent:#d7ff45;--line:#292929;--max:1180px;--radius:28px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{width:min(var(--max),calc(100% - 40px));margin:auto}
+.nav{position:fixed;z-index:20;top:18px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 32px));padding:12px 14px 12px 22px;border:1px solid #333;background:rgba(10,10,10,.72);backdrop-filter:blur(18px);border-radius:999px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:900;letter-spacing:-.06em;font-size:20px}.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:26px;font-size:14px;color:#ccc}.navlinks a:hover{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;border-radius:999px;background:var(--accent);color:#090909;font-weight:800;transition:.25s transform,.25s box-shadow}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(215,255,69,.2)}
+.hero{min-height:100vh;display:grid;place-items:center;position:relative;padding:150px 0 100px;overflow:hidden}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(to bottom,#000,transparent 85%)}
+.orb{position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(70px);opacity:.15;background:var(--accent);right:-150px;top:15%}
+.orb2{position:absolute;width:360px;height:360px;border-radius:50%;filter:blur(80px);opacity:.12;background:#fff;left:-140px;bottom:5%}
+.hero-inner{position:relative;text-align:center;max-width:1050px}
+.eyebrow{display:inline-flex;border:1px solid #3a3a3a;padding:8px 14px;border-radius:999px;color:#ccc;font-size:13px;margin-bottom:28px;animation:fadeUp .8s both}
+h1{font-size:clamp(58px,9vw,120px);line-height:.9;letter-spacing:-.085em;max-width:1050px;margin:auto}
+h1 em{font-style:normal;color:var(--accent);display:inline-block}
+.hero p{max-width:650px;margin:30px auto;color:#bdbdbd;font-size:18px}
+.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.ghost{border:1px solid #444;padding:14px 20px;border-radius:999px;color:#eee}.ghost:hover{border-color:var(--accent)}
+.ticker{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-flex;gap:35px;padding:20px 0;animation:marquee 22s linear infinite;font-size:13px;text-transform:uppercase;letter-spacing:.18em;color:#aaa}
+.ticker b{color:var(--accent)}
+.section{padding:125px 0}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:50px}.kicker{color:var(--accent);text-transform:uppercase;letter-spacing:.15em;font-size:12px;font-weight:800}.section h2{font-size:clamp(40px,6vw,76px);letter-spacing:-.07em;line-height:.95}.section-intro{max-width:470px;color:#aaa;font-size:17px}
+.services{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{position:relative;background:linear-gradient(145deg,#151515,#0d0d0d);border:1px solid #292929;border-radius:var(--radius);padding:34px;min-height:360px;overflow:hidden;transition:.35s transform,.35s border-color}
+.card:hover{transform:translateY(-8px);border-color:#555}.card:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:var(--accent);filter:blur(100px);opacity:0;right:-100px;bottom:-100px;transition:.4s}.card:hover:before{opacity:.14}
+.card-num{font-size:12px;color:#777}.card h3{font-size:34px;letter-spacing:-.05em;margin:75px 0 15px}.card p{color:#aaa;max-width:500px}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:25px}.tag{font-size:12px;border:1px solid #363636;padding:7px 10px;border-radius:999px;color:#bbb}
+.statement{background:var(--accent);color:#090909;border-radius:var(--radius);padding:70px;position:relative;overflow:hidden}.statement h2{font-size:clamp(42px,6vw,82px);max-width:900px}.statement p{max-width:650px;margin-top:25px;font-size:18px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}.step{padding:35px 25px;border-right:1px solid var(--line)}.step:last-child{border:0}.step b{color:var(--accent);font-size:13px}.step h3{margin:50px 0 10px;font-size:26px}.step p{color:#999}
+.quiz{background:#101010;border:1px solid #292929;border-radius:var(--radius);padding:50px}.quiz-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px}.quiz h2{font-size:clamp(38px,5vw,64px);letter-spacing:-.06em}.quiz p{color:#999;margin-top:18px}.question{display:none}.question.active{display:block;animation:fadeUp .35s}.question h3{font-size:24px;margin-bottom:20px}.options{display:grid;gap:10px}.option{border:1px solid #353535;border-radius:16px;padding:15px;cursor:pointer;transition:.2s}.option:hover{border-color:var(--accent);background:#191919}.progress{height:4px;background:#252525;border-radius:9px;margin-bottom:25px;overflow:hidden}.progress span{display:block;height:100%;width:0;background:var(--accent);transition:.3s}
+.testimonials{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.quote{border:1px solid #292929;border-radius:var(--radius);padding:34px;background:#101010}.stars{color:var(--accent);letter-spacing:4px}.quote p{font-size:18px;color:#ddd;margin:22px 0}.person{font-weight:800}.company{color:#777;font-size:13px}
+.cta{text-align:center;padding:130px 20px}.cta h2{font-size:clamp(50px,8vw,100px);letter-spacing:-.08em;line-height:.9}.cta p{color:#999;margin:25px auto 30px;max-width:550px}
+footer{border-top:1px solid var(--line);padding:50px 0 30px}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:30px}.footer-brand p{color:#888;max-width:350px;margin-top:15px}.footer-col h4{font-size:12px;text-transform:uppercase;color:#666;letter-spacing:.12em;margin-bottom:16px}.footer-col a{display:block;color:#aaa;margin:8px 0}.footer-col a:hover{color:var(--accent)}.copyright{border-top:1px solid var(--line);margin-top:45px;padding-top:20px;color:#555;font-size:12px;display:flex;justify-content:space-between}
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .8s,transform .8s}.reveal.visible{opacity:1;transform:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@media(max-width:800px){
+ .navlinks{display:none}.nav{padding-left:18px}.services,.testimonials,.quiz-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line)}.statement{padding:38px}.quiz{padding:30px}.footer-grid{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}
+}
+@media(max-width:500px){.container{width:min(var(--max),calc(100% - 28px))}.section{padding:90px 0}.section-head{display:block}.section-intro{margin-top:20px}.card{min-height:320px;padding:26px}.card h3{margin-top:55px}.footer-grid{grid-template-columns:1fr}.copyright{display:block}.copyright span{display:block;margin-top:8px}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="logo" href="#">MOVING<span>ATOMS</span></a>
+  <nav class="navlinks">
+    <a href="#services">Services</a><a href="#work">Our Work</a><a href="#about">About</a><a href="#quiz">Quiz</a>
+  </nav>
+  <a class="btn" href="#contact">Let's Talk ↗</a>
+</header>
+
+<main>
+<section class="hero">
+  <div class="grid"></div><div class="orb"></div><div class="orb2"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Human-centered marketing · Chicago + Remote</div>
+    <h1>We Make Marketing <em>Painless.</em></h1>
+    <p>Partners who speak your language, understand your brand and guide you every step of the way — from strategy to execution.</p>
+    <div class="hero-actions"><a class="btn" href="#contact">Get In Touch ↗</a><a class="ghost" href="#services">Explore Services ↓</a></div>
+  </div>
+</section>
+
+<div class="ticker"><div class="ticker-track">
+  <span>Design <b>✦</b></span><span>Websites <b>✦</b></span><span>SEO <b>✦</b></span><span>Paid Ads <b>✦</b></span><span>Strategy <b>✦</b></span><span>Content <b>✦</b></span>
+  <span>Design <b>✦</b></span><span>Websites <b>✦</b></span><span>SEO <b>✦</b></span><span>Paid Ads <b>✦</b></span><span>Strategy <b>✦</b></span><span>Content <b>✦</b></span>
+</div></div>
+
+<section class="section container" id="services">
+  <div class="section-head reveal"><div><div class="kicker">01 / What We Do</div><h2>Creative +<br>technical.</h2></div><p class="section-intro">Our creative strategies and technical approach help you get found online, boost conversions and foster customer retention.</p></div>
+  <div class="services">
+    <article class="card reveal"><span class="card-num">01</span><h3>Brand Design</h3><p>Creative, iconic and laser-focused design that expresses your company's message and identity.</p><div class="tags"><span class="tag">Brand Strategy</span><span class="tag">Visual Identity</span><span class="tag">Guidelines</span></div></article>
+    <article class="card reveal"><span class="card-num">02</span><h3>Web Development</h3><p>Thoughtfully designed web experiences that take your brand's digital presence to the next level.</p><div class="tags"><span class="tag">Custom Solutions</span><span class="tag">UX Design</span><span class="tag">Maintenance</span></div></article>
+    <article class="card reveal"><span class="card-num">03</span><h3>Digital Marketing & SEO</h3><p>Authentic, intent-driven content and technical SEO designed to improve visibility without sacrificing quality.</p><div class="tags"><span class="tag">Keyword Strategy</span><span class="tag">Technical SEO</span><span class="tag">Content</span></div></article>
+    <article class="card reveal"><span class="card-num">04</span><h3>Paid Ads</h3><p>Tailored campaigns using industry trends, insights and analytics to maximize reach and engagement.</p><div class="tags"><span class="tag">Ad Strategy</span><span class="tag">Optimization</span><span class="tag">Analytics</span></div></article>
+  </div>
+</section>
+
+<section class="section container" id="work">
+  <div class="statement reveal">
+    <div class="kicker">02 / The Atomic Approach</div>
+    <h2>Does it feel like your social posts get more likes from Grandma than potential customers?</h2>
+    <p>We love Grandma. But let's flip the script and uncover tactics that create a real ripple effect in your industry.</p>
+  </div>
+</section>
+
+<section class="section container" id="about">
+  <div class="section-head reveal"><div><div class="kicker">03 / Moving Atoms Means</div><h2>Meticulous<br>Marketing.</h2></div><p class="section-intro">We understand your business down to the subatomic level, then turn marketing positives and negatives into strategic action.</p></div>
+  <div class="steps">
+    <div class="step reveal"><b>01 / RELATIONSHIP</b><h3>Start with trust.</h3><p>Healthy partnerships create the foundation for honest, effective marketing.</p></div>
+    <div class="step reveal"><b>02 / DISCOVERY</b><h3>Understand your goals.</h3><p>We learn your brand, audience and ambitions before recommending a solution.</p></div>
+    <div class="step reveal"><b>03 / EXECUTION</b><h3>Create & execute.</h3><p>Strategy becomes measurable work that establishes and grows your online presence.</p></div>
+  </div>
+</section>
+
+<section class="section container" id="quiz">
+  <div class="quiz reveal">
+    <div class="quiz-grid">
+      <div><div class="kicker">04 / Find Your Solution</div><h2>90 seconds to a smarter marketing plan.</h2><p>Answer a few quick questions and uncover where your marketing has the biggest opportunity.</p></div>
+      <div>
+        <div class="progress"><span id="bar"></span></div>
+        <div class="question active"><h3>Which marketing channels are you using?</h3><div class="options"><div class="option">Social media</div><div class="option">Email marketing</div><div class="option">Paid advertising</div><div class="option">I'm not sure yet</div></div></div>
+        <div class="question"><h3>How well do you know your target audience?</h3><div class="options"><div class="option">Very well</div><div class="option">I kind of know them</div><div class="option">I have no idea</div></div></div>
+        <div class="question"><h3>Are you happy with your marketing ROI?</h3><div class="options"><div class="option">Very satisfied, but ready to grow</div><div class="option">Somewhat satisfied</div><div class="option">Not satisfied</div><div class="option">I haven't measured it yet</div></div></div>
+        <div class="question"><h3>Do you have a dedicated marketing budget?</h3><div class="options"><div class="option">Yes</div><div class="option">Not currently, but considering it</div><div class="option">No</div></div></div>
+        <div class="question"><h3>What's your biggest marketing frustration?</h3><div class="options"><div class="option">I'll tell you when we connect →</div></div></div>
+        <p id="quizStatus" style="font-size:13px;margin-top:15px;color:#666">Question 1 of 5</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section container">
+  <div class="section-head reveal"><div><div class="kicker">05 / Client Love</div><h2>Real people.<br>Real results.</h2></div></div>
+  <div class="testimonials">
+    <article class="quote reveal"><div class="stars">★★★★★</div><p>“They helped me communicate the values, personality and unique selling points of my business. My new website is easier to navigate, visually appealing and differentiates me from competitors.”</p><div class="person">Marilyn D'Andrea</div><div class="company">Sana Vita Studio</div></article>
+    <article class="quote reveal"><div class="stars">★★★★★</div><p>“Moving Atoms has been an absolute game-changer for my fitness business. Their website, brand, strategy and ideas have truly set my business apart.”</p><div class="person">Terrance Wright</div><div class="company">StayFitByT</div></article>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="kicker">06 / Ready?</div><h2>Ready To<br><em>Move Atoms?</em></h2><p>Let's nerd out on your digital strategy and turn your marketing worries into success stories.</p><a class="btn" href="mailto:hello@moving-atoms.com">Get In Touch Today ↗</a>
+</section>
+</main>
+
+<footer>
+ <div class="container">
+  <div class="footer-grid">
+   <div class="footer-brand"><div class="logo">MOVING<span>ATOMS</span></div><p>Human-centered marketing solutions to take your business to the next level. We help your business connect with the people who matter most.</p></div>
+   <div class="footer-col"><h4>Site Map</h4><a href="#">Home</a><a href="#services">Services</a><a href="#work">Our Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+   <div class="footer-col"><h4>Stay Connected</h4><a href="https://www.facebook.com/moving_atoms" target="_blank">Facebook ↗</a><a href="https://www.instagram.com/moving_atoms/" target="_blank">Instagram ↗</a><a href="https://www.youtube.com/@moving_atoms" target="_blank">YouTube ↗</a></div>
+  </div>
+  <div class="copyright"><span>© 2026 Moving Atoms LLC</span><span>Human-centered. Strategy-led. Atomic results.</span></div>
+ </div>
+</footer>
+
+<script>
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+const questions=[...document.querySelectorAll('.question')],bar=document.getElementById('bar'),status=document.getElementById('quizStatus');
+let q=0;
+function updateQuiz(){
+ questions.forEach((x,i)=>x.classList.toggle('active',i===q));
+ bar.style.width=((q+1)/questions.length*100)+'%';
+ status.textContent=`Question ${q+1} of ${questions.length}`;
+}
+document.querySelectorAll('.option').forEach(o=>o.addEventListener('click',()=>{
+ if(q<questions.length-1){q++;updateQuiz()}else{status.textContent='Thanks! Let’s build your atomic growth plan.';bar.style.width='100%'}
+}));
+updateQuiz();
+</script>
+</body>
+</html>
