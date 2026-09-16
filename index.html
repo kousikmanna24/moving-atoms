@@ -32,7 +32,7 @@ h1 em{font-style:normal;color:var(--accent);display:inline-block}
 .hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
 .ghost{border:1px solid #444;padding:14px 20px;border-radius:999px;color:#eee}.ghost:hover{border-color:var(--accent)}
 .ticker{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap}
-.ticker-track{display:inline-flex;gap:35px;padding:20px 0;animation:marquee 22s linear infinite;font-size:13px;text-transform:uppercase;letter-spacing:.18em;color:#aaa}
+.ticker-track{display:flex;width:max-content;gap:35px;padding:20px 0;animation:marquee 24s linear infinite;will-change:transform;font-size:20px;text-transform:uppercase;letter-spacing:.16em;color:#aaa;font-weight:800}
 .ticker b{color:var(--accent)}
 .section{padding:125px 0}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:50px}.kicker{color:var(--accent);text-transform:uppercase;letter-spacing:.15em;font-size:12px;font-weight:800}.section h2{font-size:clamp(40px,6vw,76px);letter-spacing:-.07em;line-height:.95}.section-intro{max-width:470px;color:#aaa;font-size:17px}
 .services{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
@@ -43,15 +43,306 @@ h1 em{font-style:normal;color:var(--accent);display:inline-block}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}.step{padding:35px 25px;border-right:1px solid var(--line)}.step:last-child{border:0}.step b{color:var(--accent);font-size:13px}.step h3{margin:50px 0 10px;font-size:26px}.step p{color:#999}
 .quiz{background:#101010;border:1px solid #292929;border-radius:var(--radius);padding:50px}.quiz-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px}.quiz h2{font-size:clamp(38px,5vw,64px);letter-spacing:-.06em}.quiz p{color:#999;margin-top:18px}.question{display:none}.question.active{display:block;animation:fadeUp .35s}.question h3{font-size:24px;margin-bottom:20px}.options{display:grid;gap:10px}.option{border:1px solid #353535;border-radius:16px;padding:15px;cursor:pointer;transition:.2s}.option:hover{border-color:var(--accent);background:#191919}.progress{height:4px;background:#252525;border-radius:9px;margin-bottom:25px;overflow:hidden}.progress span{display:block;height:100%;width:0;background:var(--accent);transition:.3s}
 .testimonials{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.quote{border:1px solid #292929;border-radius:var(--radius);padding:34px;background:#101010}.stars{color:var(--accent);letter-spacing:4px}.quote p{font-size:18px;color:#ddd;margin:22px 0}.person{font-weight:800}.company{color:#777;font-size:13px}
-.cta{text-align:center;padding:130px 20px}.cta h2{font-size:clamp(50px,8vw,100px);letter-spacing:-.08em;line-height:.9}.cta p{color:#999;margin:25px auto 30px;max-width:550px}
+
 footer{border-top:1px solid var(--line);padding:50px 0 30px}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:30px}.footer-brand p{color:#888;max-width:350px;margin-top:15px}.footer-col h4{font-size:12px;text-transform:uppercase;color:#666;letter-spacing:.12em;margin-bottom:16px}.footer-col a{display:block;color:#aaa;margin:8px 0}.footer-col a:hover{color:var(--accent)}.copyright{border-top:1px solid var(--line);margin-top:45px;padding-top:20px;color:#555;font-size:12px;display:flex;justify-content:space-between}
 .reveal{opacity:0;transform:translateY(35px);transition:opacity .8s,transform .8s}.reveal.visible{opacity:1;transform:none}
 @keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
-@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(calc(-1 * var(--loop-distance)),0,0)}}}
 @media(max-width:800px){
  .navlinks{display:none}.nav{padding-left:18px}.services,.testimonials,.quiz-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line)}.statement{padding:38px}.quiz{padding:30px}.footer-grid{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}
 }
-@media(max-width:500px){.container{width:min(var(--max),calc(100% - 28px))}.section{padding:90px 0}.section-head{display:block}.section-intro{margin-top:20px}.card{min-height:320px;padding:26px}.card h3{margin-top:55px}.footer-grid{grid-template-columns:1fr}.copyright{display:block}.copyright span{display:block;margin-top:8px}}
+@media(max-width:500px){
+  .footer-links{grid-template-columns:1fr 1fr}
+  .footer-statement{gap:7px}
+  .footer-head h2{font-size:clamp(48px,14vw,70px)}
+  .site-footer{padding-top:75px}
+
+.container{width:min(var(--max),calc(100% - 28px))}.section{padding:90px 0}.section-head{display:block}.section-intro{margin-top:20px}.card{min-height:320px;padding:26px}.card h3{margin-top:55px}.footer-grid{grid-template-columns:1fr}.copyright{display:block}.copyright span{display:block;margin-top:8px}}
+
+/* Premium footer */
+.site-footer{
+  position:relative;
+  margin-top:40px;
+  padding:78px 0 24px;
+  background:
+    radial-gradient(circle at 78% 0%, rgba(215,255,69,.08), transparent 28%),
+    linear-gradient(180deg,#0d0d0d 0%,#080808 100%);
+  border-top:1px solid #292929;
+}
+.site-footer:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  width:min(1180px,calc(100% - 40px));
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:.55;
+}
+.footer-top{
+  display:grid;
+  grid-template-columns:1.35fr .85fr;
+  gap:80px;
+  padding-bottom:58px;
+}
+.footer-brand .logo{font-size:28px}
+.footer-brand p{
+  max-width:430px;
+  margin:20px 0 25px;
+  color:#8f8f8f;
+  font-size:15px;
+}
+.footer-email{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:#eee;
+  font-weight:700;
+  border-bottom:1px solid #3a3a3a;
+  padding-bottom:8px;
+  transition:.25s;
+}
+.footer-email:hover{color:var(--accent);border-color:var(--accent)}
+.footer-email span,.footer-col a span{font-size:12px;opacity:.6}
+.footer-links{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:45px;
+}
+.footer-col h4{
+  margin-bottom:18px;
+  color:#666;
+  font-size:11px;
+  letter-spacing:.16em;
+}
+.footer-col a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:max-content;
+  min-width:145px;
+  margin:0 0 12px;
+  color:#aaa;
+  font-size:14px;
+  transition:.25s;
+}
+.footer-col a:hover{color:var(--accent);transform:translateX(3px)}
+.footer-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding-top:22px;
+  border-top:1px solid #222;
+  color:#555;
+  font-size:11px;
+  letter-spacing:.02em;
+}
+
+/* Mobile navigation */
+.menu-toggle{
+  display:none;
+  width:44px;
+  height:44px;
+  border:1px solid #3a3a3a;
+  border-radius:50%;
+  background:#111;
+  cursor:pointer;
+  padding:0;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:4px;
+}
+.menu-toggle span{
+  display:block;
+  width:17px;
+  height:1.5px;
+  background:#eee;
+  transition:.25s;
+}
+.menu-toggle.active span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.menu-toggle.active span:nth-child(2){opacity:0}
+.menu-toggle.active span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed;
+  z-index:19;
+  top:76px;
+  left:50%;
+  width:min(1120px,calc(100% - 32px));
+  transform:translate(-50%,-12px);
+  padding:12px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  background:rgba(10,10,10,.96);
+  border:1px solid #333;
+  border-radius:24px;
+  backdrop-filter:blur(20px);
+  transition:.25s ease;
+}
+.mobile-menu.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translate(-50%,0);
+}
+.mobile-menu nav{display:grid;gap:4px}
+.mobile-menu nav a:not(.btn){
+  padding:14px 12px;
+  color:#ddd;
+  border-radius:14px;
+}
+.mobile-menu nav a:not(.btn):hover{background:#171717;color:var(--accent)}
+.mobile-menu .btn{margin-top:7px}
+
+/* Premium expanded footer */
+.site-footer{
+  position:relative;
+  margin-top:0;
+  padding:100px 0 28px;
+  background:
+    radial-gradient(circle at 80% 5%,rgba(215,255,69,.10),transparent 25%),
+    linear-gradient(180deg,#0d0d0d 0%,#070707 100%);
+  border-top:1px solid #292929;
+  overflow:hidden;
+}
+.site-footer:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  width:min(1180px,calc(100% - 40px));
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:.7;
+}
+.footer-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:50px;
+  padding-bottom:70px;
+}
+.footer-head h2{
+  margin-top:16px;
+  font-size:clamp(54px,7vw,96px);
+  line-height:.9;
+  letter-spacing:-.075em;
+}
+.footer-head h2 span{color:var(--accent)}
+.footer-big-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:18px;
+  padding:18px 23px;
+  border:1px solid #3b3b3b;
+  border-radius:999px;
+  color:#eee;
+  font-weight:800;
+  transition:.25s;
+  white-space:nowrap;
+}
+.footer-big-cta span{color:var(--accent)}
+.footer-big-cta:hover{
+  border-color:var(--accent);
+  background:var(--accent);
+  color:#090909;
+  transform:translateY(-3px);
+}
+.footer-big-cta:hover span{color:#090909}
+.footer-divider{
+  height:1px;
+  background:#292929;
+}
+.footer-top{
+  display:grid;
+  grid-template-columns:1fr 1.35fr;
+  gap:90px;
+  padding:65px 0 55px;
+}
+.footer-brand .logo{font-size:32px}
+.footer-brand p{
+  max-width:460px;
+  margin:22px 0 28px;
+  color:#888;
+  font-size:15px;
+  line-height:1.75;
+}
+.footer-email{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:#eee;
+  font-weight:800;
+  border-bottom:1px solid #3b3b3b;
+  padding-bottom:9px;
+  transition:.25s;
+}
+.footer-email:hover{color:var(--accent);border-color:var(--accent)}
+.footer-email span,.footer-col a span{font-size:11px;opacity:.65}
+.footer-links{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+}
+.footer-col h4{
+  margin-bottom:20px;
+  color:#5f5f5f;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.footer-col a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  width:100%;
+  margin:0 0 14px;
+  color:#aaa;
+  font-size:14px;
+  transition:.25s;
+}
+.footer-col a:hover{
+  color:var(--accent);
+  transform:translateX(4px);
+}
+.footer-statement{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:28px 0;
+  border-top:1px solid #222;
+  border-bottom:1px solid #222;
+}
+.footer-statement span{
+  padding:8px 12px;
+  border:1px solid #2e2e2e;
+  border-radius:999px;
+  color:#777;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+.footer-bottom{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:20px;
+  padding-top:22px;
+  color:#505050;
+  font-size:11px;
+}
+.footer-bottom span:nth-child(2){text-align:center}
+.footer-bottom span:last-child{text-align:right}
+
+/* Make Atomic Approach kicker black on the lime panel */
+.atomic-kicker{color:#090909!important}
+
 </style>
 </head>
 <body>
@@ -60,8 +351,21 @@ footer{border-top:1px solid var(--line);padding:50px 0 30px}.footer-grid{display
   <nav class="navlinks">
     <a href="#services">Services</a><a href="#work">Our Work</a><a href="#about">About</a><a href="#quiz">Quiz</a>
   </nav>
-  <a class="btn" href="#contact">Let's Talk ↗</a>
+  <a class="btn nav-cta" href="#contact">Let's Talk ↗</a>
+  <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#about">About</a>
+    <a href="#quiz">Quiz</a>
+    <a class="btn" href="#contact">Let's Talk ↗</a>
+  </nav>
+</div>
 
 <main>
 <section class="hero">
@@ -74,10 +378,43 @@ footer{border-top:1px solid var(--line);padding:50px 0 30px}.footer-grid{display
   </div>
 </section>
 
-<div class="ticker"><div class="ticker-track">
-  <span>Design <b>✦</b></span><span>Websites <b>✦</b></span><span>SEO <b>✦</b></span><span>Paid Ads <b>✦</b></span><span>Strategy <b>✦</b></span><span>Content <b>✦</b></span>
-  <span>Design <b>✦</b></span><span>Websites <b>✦</b></span><span>SEO <b>✦</b></span><span>Paid Ads <b>✦</b></span><span>Strategy <b>✦</b></span><span>Content <b>✦</b></span>
-</div></div>
+<div class="ticker">
+  <div class="ticker-track" id="tickerTrack">
+    <div class="ticker-group">
+      <span>Design <b>✦</b></span>
+      <span>Websites <b>✦</b></span>
+      <span>SEO <b>✦</b></span>
+      <span>Paid Ads <b>✦</b></span>
+      <span>Strategy <b>✦</b></span>
+      <span>Content <b>✦</b></span>
+    </div>
+    <div class="ticker-group" aria-hidden="true">
+      <span>Design <b>✦</b></span>
+      <span>Websites <b>✦</b></span>
+      <span>SEO <b>✦</b></span>
+      <span>Paid Ads <b>✦</b></span>
+      <span>Strategy <b>✦</b></span>
+      <span>Content <b>✦</b></span>
+    </div>
+    <div class="ticker-group" aria-hidden="true">
+      <span>Design <b>✦</b></span>
+      <span>Websites <b>✦</b></span>
+      <span>SEO <b>✦</b></span>
+      <span>Paid Ads <b>✦</b></span>
+      <span>Strategy <b>✦</b></span>
+      <span>Content <b>✦</b></span>
+    </div>
+    <div class="ticker-group" aria-hidden="true">
+      <span>Design <b>✦</b></span>
+      <span>Websites <b>✦</b></span>
+      <span>SEO <b>✦</b></span>
+      <span>Paid Ads <b>✦</b></span>
+      <span>Strategy <b>✦</b></span>
+      <span>Content <b>✦</b></span>
+    </div>
+  </div>
+</div>
+</div>
 
 <section class="section container" id="services">
   <div class="section-head reveal"><div><div class="kicker">01 / What We Do</div><h2>Creative +<br>technical.</h2></div><p class="section-intro">Our creative strategies and technical approach help you get found online, boost conversions and foster customer retention.</p></div>
@@ -91,7 +428,7 @@ footer{border-top:1px solid var(--line);padding:50px 0 30px}.footer-grid{display
 
 <section class="section container" id="work">
   <div class="statement reveal">
-    <div class="kicker">02 / The Atomic Approach</div>
+    <div class="kicker atomic-kicker">02 / The Atomic Approach</div>
     <h2>Does it feel like your social posts get more likes from Grandma than potential customers?</h2>
     <p>We love Grandma. But let's flip the script and uncover tactics that create a real ripple effect in your industry.</p>
   </div>
@@ -130,21 +467,75 @@ footer{border-top:1px solid var(--line);padding:50px 0 30px}.footer-grid{display
     <article class="quote reveal"><div class="stars">★★★★★</div><p>“Moving Atoms has been an absolute game-changer for my fitness business. Their website, brand, strategy and ideas have truly set my business apart.”</p><div class="person">Terrance Wright</div><div class="company">StayFitByT</div></article>
   </div>
 </section>
-
-<section class="cta" id="contact">
-  <div class="kicker">06 / Ready?</div><h2>Ready To<br><em>Move Atoms?</em></h2><p>Let's nerd out on your digital strategy and turn your marketing worries into success stories.</p><a class="btn" href="mailto:hello@moving-atoms.com">Get In Touch Today ↗</a>
-</section>
 </main>
 
-<footer>
- <div class="container">
-  <div class="footer-grid">
-   <div class="footer-brand"><div class="logo">MOVING<span>ATOMS</span></div><p>Human-centered marketing solutions to take your business to the next level. We help your business connect with the people who matter most.</p></div>
-   <div class="footer-col"><h4>Site Map</h4><a href="#">Home</a><a href="#services">Services</a><a href="#work">Our Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
-   <div class="footer-col"><h4>Stay Connected</h4><a href="https://www.facebook.com/moving_atoms" target="_blank">Facebook ↗</a><a href="https://www.instagram.com/moving_atoms/" target="_blank">Instagram ↗</a><a href="https://www.youtube.com/@moving_atoms" target="_blank">YouTube ↗</a></div>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-head">
+      <div>
+        <div class="kicker">07 / Let's Connect</div>
+        <h2>Make something<br><span>meaningful.</span></h2>
+      </div>
+      <a class="footer-big-cta" href="mailto:hello@moving-atoms.com">
+        Start a conversation <span>↗</span>
+      </a>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">MOVING<span>ATOMS</span></div>
+        <p>
+          Human-centered marketing solutions built around strategy, creativity
+          and technology. We help ambitious brands get noticed, get understood
+          and keep growing.
+        </p>
+        <a class="footer-email" href="mailto:hello@moving-atoms.com">
+          hello@moving-atoms.com <span>↗</span>
+        </a>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="#">Home <span>↗</span></a>
+          <a href="#services">Services <span>↗</span></a>
+          <a href="#work">Our Work <span>↗</span></a>
+          <a href="#about">About <span>↗</span></a>
+          <a href="#quiz">Marketing Quiz <span>↗</span></a>
+          <a href="#contact">Contact <span>↗</span></a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="#services">Brand Design <span>↗</span></a>
+          <a href="#services">Web Development <span>↗</span></a>
+          <a href="#services">Digital Marketing & SEO <span>↗</span></a>
+          <a href="#services">Paid Ads <span>↗</span></a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="https://www.facebook.com/moving_atoms" target="_blank" rel="noopener">Facebook <span>↗</span></a>
+          <a href="https://www.instagram.com/moving_atoms/" target="_blank" rel="noopener">Instagram <span>↗</span></a>
+          <a href="https://www.youtube.com/@moving_atoms" target="_blank" rel="noopener">YouTube <span>↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-statement">
+      <span>Human-centered.</span>
+      <span>Strategy-led.</span>
+      <span>Built to move.</span>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Moving Atoms LLC</span>
+      <span>Chicago + Remote</span>
+      <span>Human-centered · Strategy-led · Atomic results</span>
+    </div>
   </div>
-  <div class="copyright"><span>© 2026 Moving Atoms LLC</span><span>Human-centered. Strategy-led. Atomic results.</span></div>
- </div>
 </footer>
 
 <script>
@@ -162,6 +553,37 @@ document.querySelectorAll('.option').forEach(o=>o.addEventListener('click',()=>{
  if(q<questions.length-1){q++;updateQuiz()}else{status.textContent='Thanks! Let’s build your atomic growth plan.';bar.style.width='100%'}
 }));
 updateQuiz();
+
+const tickerTrack = document.getElementById('tickerTrack');
+const tickerGroup = tickerTrack.querySelector('.ticker-group');
+
+function setTickerDistance(){
+  const gap = parseFloat(getComputedStyle(tickerTrack).columnGap) || 0;
+  tickerTrack.style.setProperty(
+    '--loop-distance',
+    `${tickerGroup.getBoundingClientRect().width + gap}px`
+  );
+}
+
+setTickerDistance();
+window.addEventListener('resize', setTickerDistance);
+
+const menuToggle = document.querySelector('.menu-toggle');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function closeMobileMenu(){
+  menuToggle.classList.remove('active');
+  menuToggle.setAttribute('aria-expanded','false');
+  mobileMenu.classList.remove('open');
+  mobileMenu.setAttribute('aria-hidden','true');
+}
+menuToggle.addEventListener('click',()=>{
+  const open = mobileMenu.classList.toggle('open');
+  menuToggle.classList.toggle('active',open);
+  menuToggle.setAttribute('aria-expanded',String(open));
+  mobileMenu.setAttribute('aria-hidden',String(!open));
+});
+mobileMenu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMobileMenu));
 </script>
 </body>
 </html>
