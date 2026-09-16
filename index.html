@@ -379,46 +379,71 @@ footer{border-top:1px solid var(--line);padding:50px 0 30px}.footer-grid{display
   object-fit:cover;
   background:#0d0d0d;
 }
-.video-placeholder{
+
+
+
+.video-frame{
+  position:relative;
+  min-height:560px;
+  overflow:hidden;
+  border:1px solid #303030;
+  border-radius:var(--radius);
+  background:#080808;
+}
+.video-frame video{
+  display:block;
+  width:100%;
+  height:560px;
+  object-fit:cover;
+  background:#080808;
+}
+.video-overlay{
   position:absolute;
   inset:0;
+  z-index:2;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:13px;
-  pointer-events:none;
+  gap:12px;
+  border:0;
+  cursor:pointer;
   color:#eee;
   background:
-    linear-gradient(135deg,rgba(8,8,8,.88),rgba(8,8,8,.58)),
-    radial-gradient(circle at 50% 50%,rgba(215,255,69,.16),transparent 32%);
+    linear-gradient(135deg,rgba(8,8,8,.82),rgba(8,8,8,.48)),
+    radial-gradient(circle at 50% 50%,rgba(215,255,69,.14),transparent 35%);
+  transition:opacity .25s,visibility .25s;
+}
+.video-overlay.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
 }
 .play-icon{
   display:grid;
   place-items:center;
-  width:78px;
-  height:78px;
-  padding-left:4px;
-  border:1px solid rgba(215,255,69,.7);
+  width:82px;
+  height:82px;
+  padding-left:5px;
+  border:1px solid rgba(215,255,69,.75);
   border-radius:50%;
   color:#090909;
   background:var(--accent);
   font-size:21px;
   box-shadow:0 15px 50px rgba(215,255,69,.18);
+  transition:transform .25s;
 }
-.video-placeholder span{
+.video-overlay:hover .play-icon{transform:scale(1.07)}
+.video-overlay-title{
   font-size:20px;
   font-weight:800;
   letter-spacing:-.03em;
 }
-.video-placeholder small{
-  color:#777;
+.video-overlay-subtitle{
+  color:#888;
   font-size:11px;
   letter-spacing:.08em;
   text-transform:uppercase;
-}
-.video-frame:has(video[src]:not([src=""])) .video-placeholder{
-  display:none;
 }
 
 </style>
@@ -540,15 +565,16 @@ footer{border-top:1px solid var(--line);padding:50px 0 30px}.footer-grid{display
   </div>
 
   <div class="video-frame reveal">
-    <video controls playsinline preload="metadata" poster="">
+    <video id="messageVideo" controls playsinline preload="metadata">
       <source src="https://raw.githubusercontent.com/kousikmanna24/moving-atoms/main/Welcome%20To%20Moving%20Atoms!%20-%20Moving%20Atoms%20%281080p%29.mp4" type="video/mp4">
       Your browser does not support the video element.
     </video>
-    <div class="video-placeholder">
-      <div class="play-icon">▶</div>
-      <span>Watch our message</span>
-      <small>Add your video URL in the HTML</small>
-    </div>
+
+    <button class="video-overlay" id="videoOverlay" type="button" aria-label="Play video">
+      <span class="play-icon">▶</span>
+      <span class="video-overlay-title">Watch our message</span>
+      <span class="video-overlay-subtitle">A message from Moving Atoms</span>
+    </button>
   </div>
 </section>
 
@@ -676,6 +702,30 @@ menuToggle.addEventListener('click',()=>{
   mobileMenu.setAttribute('aria-hidden',String(!open));
 });
 mobileMenu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMobileMenu));
+
+const messageVideo = document.getElementById('messageVideo');
+const videoOverlay = document.getElementById('videoOverlay');
+
+if(messageVideo && videoOverlay){
+  function updateVideoOverlay(){
+    videoOverlay.classList.toggle('hidden', !messageVideo.paused && !messageVideo.ended);
+  }
+
+  videoOverlay.addEventListener('click',()=>{
+    if(messageVideo.paused || messageVideo.ended){
+      if(messageVideo.ended) messageVideo.currentTime = 0;
+      messageVideo.play();
+    }
+  });
+
+  messageVideo.addEventListener('play', updateVideoOverlay);
+  messageVideo.addEventListener('playing', updateVideoOverlay);
+  messageVideo.addEventListener('pause', updateVideoOverlay);
+  messageVideo.addEventListener('ended', updateVideoOverlay);
+
+  updateVideoOverlay();
+}
+
 </script>
 </body>
 </html>
